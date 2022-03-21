@@ -1,0 +1,65 @@
+{
+  "id": "3261072",
+  "name": "shop",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1306",
+      "name": "购物车空",
+      "font_class": "gouwuchekong",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "77156",
+      "name": "微信",
+      "font_class": "weixin",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "599927",
+      "name": "微博",
+      "font_class": "weibo",
+      "unicode": "e66b",
+      "unicode_decimal": 58987
+    },
+    {
+      "icon_id": "809209",
+      "name": "价格预测",
+      "font_class": "jiageyuce",
+      "unicode": "e653",
+      "unicode_decimal": 58963
+    },
+    {
+      "icon_id": "991635",
+      "name": "赞 圈",
+      "font_class": "zanquan",
+      "unicode": "e61d",
+      "unicode_decimal": 58909
+    },
+    {
+      "icon_id": "1172663",
+      "name": "在线客服",
+      "font_class": "zaixiankefu",
+      "unicode": "e62b",
+      "unicode_decimal": 58923
+    },
+    {
+      "icon_id": "4488390",
+      "name": "个人中心-问题反馈",
+      "font_class": "gerenzhongxin-wentifankui",
+      "unicode": "e697",
+      "unicode_decimal": 59031
+    },
+    {
+      "icon_id": "5018934",
+      "name": "w物流-01",
+      "font_class": "wwuliu-",
+      "unicode": "e6a8",
+      "unicode_decimal": 59048
+    }
+  ]
+}
