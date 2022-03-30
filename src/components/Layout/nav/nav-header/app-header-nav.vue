@@ -25,47 +25,19 @@
 </template>
 
 <script lang="ts" setup>
-interface List {
-  id?: string;
-  name: string;
-  picture?: string;
-  children?: List[];
-  goods?:Goods[];
-  [propName : string ] : any
-}
-interface Goods{
-    desc?:string;
-    discount?: string;
-    id?:string
-    name?: string;
-    orderNum?: string | number;
-    picture?: string;
-    price?:string;
-}
-import { defineComponent, ref } from "vue";
-import { getCategory } from "@/http/nav";
 
-let list = ref<List[]>([
-  {
-    name: "居家",
-  },
-  { name: "美食" },
-  { name: "服饰" },
-  { name: "母婴" },
-  { name: "个护" },
-  { name: "严选" },
-  { name: "数码" },
-  { name: "运动" },
-  { name: "杂货" },
-]);
-getCategory()
-  .then((res) => {
-    const { result } = res;
-    list.value = result;
-  })
-  .catch((err:any) => {
-    console.log(err);
-  });
+import { computed, ref, watch, watchEffect } from "vue";
+import {useCategory} from '@/stores/category'
+import { List } from "@/type/category";
+let list = ref<List[]>([]);
+
+
+let Category = useCategory() 
+ Category.getList()
+ watchEffect(()=>{
+   list.value = Category.list as List[]
+ })
+
 
 const show = (item:List) => {
   const category = list.value.find(category=>category.id === item.id)

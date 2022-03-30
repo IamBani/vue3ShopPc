@@ -1,12 +1,50 @@
 import { App } from 'vue'
 import {
-  ElButton, ElSwitch, ElForm, ElFormItem, ElInput, ElIcon, ElCard, ElCheckbox,
-  ElContainer, ElFooter, ElHeader, ElMain, ElMenu, ElResult,
-  ElBreadcrumb, ElRow, ElCol, ElPopover,
-  ElInputNumber, ElDropdown, ElDropdownItem, ElTooltip,
-  ElAvatar, ElTag, ElTabs, ElSpace, ElDialog, ElRadio, ElDatePicker, ElSelect, ElOption, ElUpload, ElTimePicker, ElTable, ElMessage,
-  ElConfigProvider, ElDescriptions, ElDescriptionsItem, ElEmpty, ElSubMenu, ElMenuItem
-} from 'element-plus'
+  ElButton,
+  ElSwitch,
+  ElForm,
+  ElFormItem,
+  ElInput,
+  ElIcon,
+  ElCard,
+  ElCheckbox,
+  ElContainer,
+  ElFooter,
+  ElHeader,
+  ElMain,
+  ElMenu,
+  ElResult,
+  ElBreadcrumb,
+  ElRow,
+  ElCol,
+  ElPopover,
+  ElInputNumber,
+  ElDropdown,
+  ElDropdownItem,
+  ElTooltip,
+  ElAvatar,
+  ElTag,
+  ElTabs,
+  ElSpace,
+  ElDialog,
+  ElRadio,
+  ElDatePicker,
+  ElSelect,
+  ElOption,
+  ElUpload,
+  ElTimePicker,
+  ElTable,
+  ElMessage,
+  ElConfigProvider,
+  ElDescriptions,
+  ElDescriptionsItem,
+  ElEmpty,
+  ElSubMenu,
+  ElMenuItem,
+  ElCarousel,
+  ElCarouselItem,
+  ElImage
+} from "element-plus";
 import * as ElIconModules from '@element-plus/icons-vue'
 import 'element-plus/dist/index.css'
 
@@ -63,6 +101,9 @@ export default {
     Vue.component(ElDropdown.name, ElDropdown)
     Vue.component(ElDropdownItem.name, ElDropdownItem)
     Vue.component(ElTooltip.name, ElTooltip)
+    Vue.component(ElCarousel.name, ElCarousel);
+    Vue.component(ElCarouselItem.name, ElCarouselItem)
+    Vue.component(ElImage.name, ElImage);
     Vue.config.globalProperties.$message = ElMessage
     registeredSvgIcon(Vue)
 
