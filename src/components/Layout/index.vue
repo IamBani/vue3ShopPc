@@ -19,5 +19,6 @@ import Nav from "./nav/index.vue";
 <style scoped lang="less">
 .main {
   background-color: #f5f5f5;
+  padding: 0;
 }
 </style>

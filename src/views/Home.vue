@@ -4,6 +4,7 @@
       <HomeCategory />
       <HomeBanner></HomeBanner>
     </div>
+     <HomeFresh></HomeFresh>
   </div>
 </template>
 
@@ -11,6 +12,6 @@
 import { ref } from 'vue';
 import HomeCategory from "./home/HomeCategory.vue"
 import HomeBanner from "./home/HomeBanner.vue"
-
+import HomeFresh from './home/HomeFresh.vue'
 
 </script>

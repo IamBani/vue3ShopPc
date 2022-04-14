@@ -18,4 +18,13 @@ export const getHomeBanner = <T = any>(data?: T, option?: YWZRequestConfig) => {
   });
 };
 
+export const getHomeFresh = <T = any>(data?: T, option?: YWZRequestConfig) => {
+  return request({
+    url: "/home/new",
+    method: "GET",
+    data,
+    ...option,
+  });
+};
+
 

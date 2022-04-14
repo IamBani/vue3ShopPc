@@ -25,7 +25,6 @@ interface Banner {
 let banner = ref<Banner[]>([]);
 const getBanner = async () => {
   const { result } = await getHomeBanner();
-  console.log(result);
   banner.value = result;
 };
 getBanner()
