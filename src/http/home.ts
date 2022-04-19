@@ -27,4 +27,20 @@ export const getHomeFresh = <T = any>(data?: T, option?: YWZRequestConfig) => {
   });
 };
 
+/**
+ * 首页-人气推荐
+ * @param data 
+ * @param option axiso 参数
+ * @returns 
+ */
+export const getHomeHot = <T = any>(data?: T, option?: YWZRequestConfig) => {
+  return request({
+    url: "/home/hot",
+    method: "GET",
+    data,
+    ...option,
+  });
+};
+
+
 
