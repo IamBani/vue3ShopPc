@@ -1,37 +1,34 @@
 <template>
   <HomePanel title="人气推荐" sub-title="人气爆款 不容错过">
-    <ul ref="pannel" class="goods-list">
-      <li v-for="item in goods" :key="item.id">
-        <RouterLink to="/">
-          <img :src="item.picture" :alt="item.alt" />
-          <p class="name">{{ item.title }}</p>
-          <p class="desc">{{ item.alt }}</p>
-        </RouterLink>
-      </li>
-    </ul>
+    <div style="position: relative; height: 426px" ref="target">
+      <ul ref="pannel" class="goods-list">
+        <li v-for="item in goods" :key="item.id">
+          <RouterLink to="/">
+            <img :src="item.picture" :alt="item.alt" />
+            <p class="name">{{ item.title }}</p>
+            <p class="desc">{{ item.alt }}</p>
+          </RouterLink>
+        </li>
+      </ul>
+    </div>
   </HomePanel>
 </template>
 
 <script lang="ts" setup>
+import { useLazyData } from "@/hooks";
+
+import { getHomeHot } from "@/http/home";
+import { computed, ref,unref } from "vue";
+import HomePanel from "./HomePanel.vue";
 interface goodsList {
-  id: string
-  picture: string
-  title: string
-  alt: string
+  id: string;
+  picture: string;
+  title: string;
+  alt: string;
 }
+// const goods = ref<goodsList[]>([]);
+const { target, result:goods } = useLazyData<goodsList>(getHomeHot);
 
-import { getHomeHot } from '@/http/home'
-import { ref } from 'vue'
-import HomePanel from './HomePanel.vue'
-const goods = ref<goodsList[]>([])
-const getGoods = () => {
-  getHomeHot().then((data) => {
-    console.log(data)
-    goods.value = data.result
-  })
-}
-
-getGoods()
 </script>
 
 <style scoped lang='less'>

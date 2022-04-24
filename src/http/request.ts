@@ -4,11 +4,16 @@ import type { RequestConfig } from './types'
 export interface YWZRequestConfig<T=any> extends RequestConfig {
   data?: T
 }
-interface YWZResponse<T> {
-  statusCode: number
-  desc: string
-  result: T
+export interface YWZResponse<T=any> {
+  code: number;
+  msg: string;
+  result: T;
 }
+
+export type CallbackFunction = <T = any>(
+  data?: T,
+  option?: YWZRequestConfig
+) => Promise<YWZResponse>;
 
 const requestInstance = new Request({
   baseURL: "http://pcapi-xiaotuxian-front-devtest.itheima.net/",
