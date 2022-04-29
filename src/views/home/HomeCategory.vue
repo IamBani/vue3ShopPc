@@ -70,9 +70,8 @@ const brand = reactive({
 });
 let categoryId = ref<string | undefined>("");
 let Category = useCategory();
-getHomeBrand({ limit: 9 })
+getHomeBrand({ limit: 9 },{request_cancel:false})
   .then((res) => {
-    console.log(res);
     brand.brands = res.result;
   })
   .catch((err) => {

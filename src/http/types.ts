@@ -9,5 +9,10 @@ export interface RequestInterceptors {
 }
 // 自定义传入的参数
 export interface RequestConfig extends AxiosRequestConfig {
-  interceptors?: RequestInterceptors
+  interceptors?: RequestInterceptors,
+  RequestConfigExtraOptions?:RequestConfigExtraOptions
+}
+
+export interface RequestConfigExtraOptions{
+  request_cancel?:boolean
 }

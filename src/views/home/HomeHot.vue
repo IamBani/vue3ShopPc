@@ -26,7 +26,6 @@ interface goodsList {
   title: string;
   alt: string;
 }
-// const goods = ref<goodsList[]>([]);
 const { target, result:goods } = useLazyData<goodsList>(getHomeHot);
 
 </script>

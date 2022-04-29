@@ -1,8 +1,10 @@
 import Request from './index'
 
-import type { RequestConfig } from './types'
+import type { RequestConfig,RequestConfigExtraOptions } from './types'
 export interface YWZRequestConfig<T=any> extends RequestConfig {
   data?: T
+}
+export interface RequestConfigOptions extends RequestConfigExtraOptions,Omit<YWZRequestConfig,'RequestConfigExtraOptions'>{
 }
 export interface YWZResponse<T=any> {
   code: number;
@@ -32,7 +34,6 @@ const requestInstance = new Request({
     },
   },
 });
-
 const request = < D = any, T = any > (config: YWZRequestConfig<D>) => {
      const { method = "GET" } = config;
      if (method === "get" || method === "GET") {

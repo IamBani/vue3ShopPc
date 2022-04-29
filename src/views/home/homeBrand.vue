@@ -1,14 +1,22 @@
 <template>
   <HomePanel title="热门品牌" sub-title="国际经典 品质保证">
     <template v-slot:right>
-      <el-icon class="iconfont icon-angle-left prev"><arrow-left /></el-icon>
-      <el-icon class="iconfont icon-angle-right next"><arrow-right /></el-icon>
+      <el-icon @click="toggle(-1)"  :class="{disabled:index===0}" class="iconfont icon-angle-left prev"
+        ><arrow-left
+      /></el-icon>
+      <el-icon @click="toggle(1)"  :class="{disabled:index===1}" class="iconfont icon-angle-right next"
+        ><arrow-right
+      /></el-icon>
     </template>
-    <div class="box" ref="box">
-      <ul class="list" >
-        <li v-for="i in 10" :key="i">
+    <div ref="target" class="box">
+      <ul
+        v-if="brands.length"
+        class="list"
+        :style="{ transform: `translateX(${-index * 1240}px)` }"
+      >
+        <li v-for="item in brands" :key="item.id">
           <RouterLink to="/">
-            <img src="http://zhoushugang.gitee.io/erabbit-client-pc-static/uploads/brand_goods_1.jpg" alt="">
+            <img :src="item.picture" alt="" />
           </RouterLink>
         </li>
       </ul>
@@ -16,17 +24,23 @@
   </HomePanel>
 </template>
 
-
 <script lang="ts" setup>
-import HomePanel from './HomePanel.vue';
-import { defineComponent } from 'vue'
-
+import HomePanel from './HomePanel.vue'
+import { ref } from 'vue'
+import { useLazyData } from '@/hooks'
+import { getHomeBrand } from '@/http/home'
+let { target, result: brands } = useLazyData(() => getHomeBrand({limit: 10}))
+const index = ref(0)
+const toggle = (step: number) => {
+  const newIndex = index.value + step
+  if (newIndex < 0 || newIndex > 1) return
+  index.value = newIndex
+}
 </script>
-
 
 <style lang="less" scoped>
 .home-panel {
-  background:#f5f5f5
+  background: #f5f5f5;
 }
 .iconfont {
   width: 20px;
@@ -67,5 +81,4 @@ import { defineComponent } from 'vue'
     }
   }
 }
-
 </style>

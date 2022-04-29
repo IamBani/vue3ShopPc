@@ -1,6 +1,5 @@
-import request, { YWZRequestConfig } from "./request";
-
-export const getHomeBrand = <T = any>(data?: T, option?: YWZRequestConfig) => {
+import request,{RequestConfigOptions} from "./request";
+export const getHomeBrand = <T = any>(data?: T, option?: RequestConfigOptions) => {
   return request({
     url: "/home/brand",
     method: "GET",
@@ -9,7 +8,7 @@ export const getHomeBrand = <T = any>(data?: T, option?: YWZRequestConfig) => {
   });
 };
 
-export const getHomeBanner = <T = any>(data?: T, option?: YWZRequestConfig) => {
+export const getHomeBanner = <T = any>(data?: T, option?: RequestConfigOptions) => {
   return request({
     url: "/home/banner",
     method: "GET",
@@ -18,7 +17,7 @@ export const getHomeBanner = <T = any>(data?: T, option?: YWZRequestConfig) => {
   });
 };
 
-export const getHomeFresh = <T = any>(data?: T, option?: YWZRequestConfig) => {
+export const getHomeFresh = <T = any>(data?: T, option?: RequestConfigOptions) => {
   return request({
     url: "/home/new",
     method: "GET",
@@ -33,7 +32,7 @@ export const getHomeFresh = <T = any>(data?: T, option?: YWZRequestConfig) => {
  * @param option axiso 参数
  * @returns 
  */
-export const getHomeHot = <T = any>(data?: T, option?: YWZRequestConfig) => {
+export const getHomeHot = <T = any>(data?: T, option?: RequestConfigOptions) => {
   return request({
     url: "/home/hot",
     method: "GET",
@@ -41,6 +40,7 @@ export const getHomeHot = <T = any>(data?: T, option?: YWZRequestConfig) => {
     ...option,
   });
 };
+
 
 
 

@@ -120,8 +120,10 @@ export default class AdjoinMatrix {
    * 传入一个顶点数组，求出交集
    */
   getUnions(params: AdjoinType) {
+    debugger
     const paramsColSum = this.getColSum(params)
     const unions: AdjoinType = []
+    console.log(this.vertex)
     paramsColSum.forEach((item, index) => {
       // 数字大于等于总列数，说明是可选的
       if (item >= params.length && this.vertex[index]) {
