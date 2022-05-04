@@ -52,7 +52,9 @@ class Request {
         console.log('全局响应拦截器')
         return res.data
       },
-      (err: any) => err
+      (err: any) => {
+       return Promise.reject(err)
+      }
     )
   }
   request<T>(config: RequestConfigOptions): Promise<T> {
@@ -82,7 +84,6 @@ class Request {
             /* eslint-disable @typescript-eslint/no-unused-vars */
             results = config.interceptors.responseInterceptors<T>(res)
           }
-
           resolve(results)
         })
         .catch((err: any) => {

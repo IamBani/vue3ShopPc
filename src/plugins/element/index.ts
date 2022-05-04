@@ -15,6 +15,7 @@ import {
   ElMenu,
   ElResult,
   ElBreadcrumb,
+  ElBreadcrumbItem,
   ElRow,
   ElCol,
   ElPopover,
@@ -49,7 +50,9 @@ import * as ElIconModules from '@element-plus/icons-vue'
 import 'element-plus/dist/index.css'
 
 import SvgIcon from '@/components/Svg/Svg.vue'
+import  More  from '@/components/More.vue';
 import { isValidKey } from '@/utils/icon'
+import { defineDirective } from '@/directive/lazy';
 
 
 function registeredSvgIcon(app: App): void {
@@ -78,6 +81,7 @@ export default {
     Vue.component(ElSubMenu.name, ElSubMenu)
     Vue.component(ElMenuItem.name, ElMenuItem)
     Vue.component(ElBreadcrumb.name, ElBreadcrumb)
+    Vue.component(ElBreadcrumbItem.name, ElBreadcrumbItem);
     Vue.component(ElResult.name, ElResult)
     Vue.component(ElRow.name, ElRow)
     Vue.component(ElCol.name, ElCol)
@@ -108,5 +112,7 @@ export default {
     registeredSvgIcon(Vue)
 
     Vue.component('svg-icon', SvgIcon)
+    Vue.component("XtxMore",More);
+    defineDirective(Vue)
   }
 }

@@ -23,6 +23,16 @@ const routes: Array<RouteRecordRaw> = [
       },
     ],
   },
+  {
+    path: "/login",
+    name: "login",
+    component: () => import("@/views/Login.vue"),
+  },
+  {
+    path: "/login/callback",
+    name: "loginCallback",
+    component: () => import("@/views/login/LoginCallBack.vue"),
+  },
 ];
 
 const router = createRouter({

@@ -9,14 +9,12 @@
                 ><i class="iconfont icon-user"></i>{{profile.account}}</a
               >
             </li>
-            <li><a href="javascript:;">退出登录</a></li>
+            <li><a @click="logout" href="javascript:;">退出登录</a></li>
           </template>
           <template v-else>
-            <li><a href="javascript:;">请先登录</a></li>
+            <li><RouterLink to="/login">请先登录</RouterLink></li>
             <li><a href="javascript:;">免费注册</a></li>
           </template>
-          <li><a href="javascript:;">请先登录</a></li>
-          <li><a href="javascript:;">免费注册</a></li>
           <li><a href="javascript:;">我的订单</a></li>
           <li><a href="javascript:;">会员中心</a></li>
           <li><a href="javascript:;">帮助中心</a></li>
@@ -33,9 +31,14 @@
 <script lang="ts" setup>
 import userStore from "@/stores/user";
 import { defineComponent } from "vue";
+import { useRouter } from "vue-router";
 const user = userStore();
-console.log(user.getUser);
+const router = useRouter()
 const profile = user.getUser;
+const logout =()=>{
+  user.setProfile({})
+  router.push('/login')
+}
 </script>
 
 <style lang="less" scoped>
