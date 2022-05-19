@@ -5,7 +5,10 @@
 </template>
 
 <script lang="ts" setup>
-import {Breadcrumb} from '../TopCategory.vue'
+export interface Breadcrumb {
+  title: string;
+  to?: string;
+}
 import { defineProps, PropType } from "vue";
 defineProps({
   list:{

@@ -53,7 +53,7 @@ interface Children {
 import { ref } from "vue";
 import { getHomeBanner } from "@/http/home";
 import { getCategory } from "@/http/api/category";
-import TopBreadcrumb from "./TopCategory/TopBreadcrumb.vue";
+import TopBreadcrumb from "@/components/Breadcrumb/index.vue";
 import TopCarousel from "./TopCategory/TopCarousel.vue";
 import GoodsItem from "./TopCategory/GoodsItem.vue";
 import { useRoute } from "vue-router";
