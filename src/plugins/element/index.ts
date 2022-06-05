@@ -50,7 +50,8 @@ import * as ElIconModules from '@element-plus/icons-vue'
 import 'element-plus/dist/index.css'
 
 import SvgIcon from '@/components/Svg/Svg.vue'
-import  More  from '@/components/More.vue';
+import More from '@/components/More.vue';
+import InfiniteLoading from '@/components/Infinite-loading.vue'
 import { isValidKey } from '@/utils/icon'
 import { defineDirective } from '@/directive/lazy';
 
@@ -112,7 +113,8 @@ export default {
     registeredSvgIcon(Vue)
 
     Vue.component('svg-icon', SvgIcon)
-    Vue.component("XtxMore",More);
+    Vue.component("XtxMore", More);
+    Vue.component("InfiniteLoading", InfiniteLoading);
     defineDirective(Vue)
   }
 }

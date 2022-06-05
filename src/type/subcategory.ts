@@ -9,6 +9,7 @@ export interface Brands extends Categories {
 export type Properties = Categories;
 export interface SaleProperties extends Categories {
   properties: Properties[];
+  [propname: string]: any;
 }
 export interface SubFilterList {
   id: string;

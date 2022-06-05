@@ -3,9 +3,9 @@
     <div class="item" v-for="item in list" :key="item.id">
       <div class="head">{{ item.name }}：</div>
       <div class="body">
-        <a href="javascript:;">全部</a>
+        <a href="javascript:;" :class="item.activeId===''?'active':''">全部</a>
         <a href="javascript:;" v-for="p in item.properties" :key="p.id">
-          {{ p.name }}
+         <span :class="item.activeId===p.id?'active':''">{{ p.name }}</span> 
         </a>
       </div>
     </div>
@@ -23,9 +23,12 @@ const list = ref< Partial<SaleProperties>[]>([]);
 watch(subFilter, (sub) => {
   let saleProperties = sub.saleProperties || [];
   list.value = [
-    { id: "brands", name: "品牌", properties: subFilter?.brands },
+    { id: "brands", name: "品牌", properties: sub?.brands },
     ...saleProperties,
   ];
+  list.value.forEach(item => {
+    item.activeId = ''
+  })
 });
 
 </script>
