@@ -20,3 +20,20 @@ export interface SubFilterList {
   brands: Brands[];
   saleProperties: SaleProperties[];
 }
+
+export interface SortParams {
+  sortField: null | string;
+  sortMethod: null | string;
+  inventory: boolean;
+  onlyDiscount: boolean;
+}
+
+export interface Obj {
+  brandId: null | string;
+  attrs: Attrs[] | null;
+}
+
+interface Attrs {
+  groupName: string | undefined;
+  propertyName: string | undefined;
+}

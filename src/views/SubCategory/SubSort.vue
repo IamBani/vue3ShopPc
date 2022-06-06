@@ -12,26 +12,25 @@
       </a>
     </div>
     <div class="check">
-      <el-checkbox v-model="sortParams.inventory">仅显示有货商品</el-checkbox>
-      <el-checkbox v-model="sortParams.onlyDiscount">仅显示特惠商品</el-checkbox>
+      <el-checkbox @change="changeCheck" v-model="sortParams.inventory">仅显示有货商品</el-checkbox>
+      <el-checkbox @change="changeCheck" v-model="sortParams.onlyDiscount">仅显示特惠商品</el-checkbox>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref } from "vue";
-interface SortParams{
-  sortField: null | string,
-  sortMethod: null | string,
-  inventory: boolean,
-  onlyDiscount: boolean,
-}
+import {SortParams} from '@/type/subcategory'
+import { reactive,defineEmits } from "vue";
+
 const sortParams = reactive<SortParams>({
   sortField: null,
   sortMethod: null,
   inventory: false,
   onlyDiscount: false,
 });
+const emit= defineEmits<{
+    (e: 'sortChange', params: SortParams): void
+  }>()
 
 const changeSort = (sortField:string | null) => {
     if (sortField === 'price') {
@@ -46,6 +45,10 @@ const changeSort = (sortField:string | null) => {
         sortParams.sortField = sortField
         sortParams.sortMethod = null
     }
+    emit('sortChange',sortParams)
+}
+const changeCheck = () => {
+  emit('sortChange',sortParams)
 }
 </script>
 

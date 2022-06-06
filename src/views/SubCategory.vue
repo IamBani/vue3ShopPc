@@ -3,11 +3,11 @@
     <div class="container">
       <!-- 面包屑 -->
       <Breadcrumb :list="list"></Breadcrumb>
-      <SubFilter></SubFilter>
+      <SubFilter @filter-change="filterChange"></SubFilter>
       <!-- 筛选分区 -->
       <div class="goods-list">
         <!-- 排序 -->
-       <SubSort></SubSort>
+       <SubSort @sort-change="sortChange"></SubSort>
         <!-- 商品列表 -->
         <ul class="list">
           <li v-for="goods in goodsList" :key="goods.id">
@@ -48,7 +48,7 @@ export interface GoodsList{
 }
 
 import {subFilterKey} from '@/utils/symbols'
-import {SubFilterList} from '@/type/subcategory'
+import {SubFilterList,SortParams,Obj} from '@/type/subcategory'
 import {findSubFilter,findSubCategoryGoods} from '@/http/api/SubCategory'
 import { onMounted, provide, ref } from 'vue'
 import {getHomeBanner} from '@/http/home'
@@ -87,6 +87,20 @@ const getData = async () => {
       finished.value = true;
   }
    loading.value = false;
+}
+const sortChange = (sortParams:SortParams) => {
+  console.log(sortParams);
+  finished.value = false
+  reqParams = { ...reqParams, ...sortParams }
+  reqParams.page = 1
+  goodsList.value = []
+}
+const filterChange = (params:Obj) => {
+    finished.value = false;
+      // 合并请求参数，保留之前参数
+      reqParams = { ...reqParams, ...params };
+      reqParams.page = 1;
+      goodsList.value = [];
 }
 provide(subFilterKey,subFilter)
 </script>
