@@ -16,7 +16,7 @@ export interface Banner {
 }
 import { ref } from 'vue'
 import {getHomeBanner} from '@/http/home'
-
+import SubCarousel from './SubCategory/index.vue'
 let banner = ref<Banner[]>([])
 getHomeBanner().then(res=>{
   banner.value = res.result

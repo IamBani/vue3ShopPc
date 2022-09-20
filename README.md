@@ -39,7 +39,7 @@ docker run --detach \
   --volume /home/gitlab/data:/var/opt/gitlab \
   gitlab/gitlab-ce:12.10.5-ce.0
 
-sudo docker run -d --name gitlab-runner-test --restart always \
+sudo docker run -d --name gitlab-runner --restart always \
   -v /home/gitlab-runner/config:/etc/gitlab-runner \
   -v /var/run/docker.sock:/var/run/docker.sock \
   gitlab/gitlab-runner:latest
@@ -49,7 +49,7 @@ sudo docker run -d --name gitlab-runner-test --restart always \
   --executor "docker" \
   --docker-image alpine:latest \
   --url "http://110.40.173.123:8180/" \
-  --registration-token "ycPmUvMx4kGBhAx-gszj" \
+  --registration-token "SvxdM_H2xPbxLLHsiPsp" \
   --description "gitlab-runner" \
   --tag-list "vue3App" \
   --run-untagged="true" \
