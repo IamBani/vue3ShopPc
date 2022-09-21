@@ -22,7 +22,7 @@ jobs:
       run: npm install
     - name: link 
       run: npm run lint
-    - name: build  
+    - name: runbuild  
       run: npm run build 
     - name: test
       run: npm run test:unit
