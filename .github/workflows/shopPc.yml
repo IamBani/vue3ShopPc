@@ -31,7 +31,7 @@ jobs:
       with:
         host: 110.40.173.123
         port: 22
-        username: ${{ USERNAME }}
-        password: ${{ PASSWORD }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
         source: 'dist'
-        target: ${{ TARGET }}
+        target: ${{ secrets.TARGET }}
