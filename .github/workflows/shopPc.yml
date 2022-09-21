@@ -26,3 +26,12 @@ jobs:
       run: npm run build 
     - name: test
       run: npm run test:unit
+    - name: SCP Files
+      uses: appleboy/scp-action@master
+      with:
+        host: 110.40.173.123
+        port: 22
+        username: ${{ USERNAME }}
+        password: ${{ PASSWORD }}
+        source: 'dist'
+        target: ${{ TARGET }}
