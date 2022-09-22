@@ -1,7 +1,7 @@
 <template>
   <header class="app-header">
     <div class="container">
-      <h1 class="logo"><RouterLink to="/">小兔鲜</RouterLink></h1>
+      <h1 class="logo"><RouterLink :style="logoName" to="/">小兔鲜</RouterLink></h1>
       <appHeaderNav></appHeaderNav>
       <div class="search">
         <el-icon class="icon-search">
@@ -10,7 +10,7 @@
         <input type="text" placeholder="搜一搜" />
       </div>
       <div class="cart">
-        <a class="curr" href="#">
+        <a class="curr" href="#"> 
           <svg-icon
             iconName="gouwuchekong"
             class="iconfont icon-cart"
@@ -29,7 +29,7 @@ import logo from "@/assets/images/logo.png";
 import { nextTick, ref, unref, watch, watchEffect } from "vue";
 import { ClickOutside as vClickOutside } from "element-plus";
 
-const logoName = ref(`url(${logo}) no-repeat center 18px / contain `);
+const logoName = ref({background:`url(${logo}) no-repeat center 18px / contain `});
 </script>
 
 
@@ -47,7 +47,7 @@ const logoName = ref(`url(${logo}) no-repeat center 18px / contain `);
       height: 132px;
       width: 100%;
       text-indent: -9999px;
-      background: v-bind(logoName);
+      // background: v-bind(logoName); //生产环境不显示 有bug
     }
   }
   .navs {
