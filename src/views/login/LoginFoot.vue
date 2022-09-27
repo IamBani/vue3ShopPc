@@ -13,7 +13,7 @@
       <p>CopyRight &copy; 小兔鲜儿</p>
     </div>
   </footer>
-  <!-- <el-upload
+  <el-upload
     ref="uploadRef"
     class="upload-demo"
     action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15"
@@ -27,7 +27,7 @@
     <el-button class="ml-3" type="success" @click="submitUpload">
       upload to server
     </el-button>
-  </el-upload> -->
+  </el-upload>
 </template>
 
 <script lang="ts" setup>
@@ -37,6 +37,7 @@ type ChunkArr = {
 }
 import type { UploadFile, UploadFiles } from 'element-plus'
 import SparkMD5 from 'spark-md5'
+import axios from 'axios'
 const onChang = (e: UploadFile, el: UploadFiles) => {
   console.log(e, el)
   cutBlob(e.raw as File)
@@ -99,6 +100,13 @@ const cutBlob = (file: File, fileHash = 1, chunkSize = 100) => {
           reject(err)
         })
     })
+  }
+  const getPost = () =>{
+    axios.post("http:localhost:3000/api/upload/file",{
+      
+    }).then(res=>{
+      console.log(res);
+    }).catch(err=>console.log(err))
   }
 </script>
 
