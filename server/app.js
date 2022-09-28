@@ -22,7 +22,7 @@ if (!fs.existsSync(uploadPath)) {
   if (ctx.request.method === 'OPTIONS') {
     ctx.status = 200
   }
- 
+  ctx.body = "hell,word123"
   try {
     await next();
   } catch (err) {

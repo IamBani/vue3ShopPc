@@ -16,12 +16,12 @@ yarn build
 ```
 
 ### Run your unit tests
-```
+```js
 yarn test:unit
 ```
 
 ### Lints and fixes files
-```
+```js
 yarn lint
 ```
 
@@ -64,7 +64,6 @@ docker run --rm -v /srv/gitlab-runner/config:/etc/gitlab-runner gitlab/gitlab-ru
  -v /home/gitlab-runner/config:/etc/gitlab-runner \
  -v /var/run/docker.sock:/var/run/docker.sock \
  gitlab/gitlab-runner:latest
-
 
 
 

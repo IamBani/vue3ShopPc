@@ -43,6 +43,7 @@ const onChang = (e: UploadFile, el: UploadFiles) => {
   cutBlob(e.raw as File)
     .then((res) => {
       console.log(res)
+      
     })
     .catch((err) => console.log(err))
 }
@@ -103,7 +104,7 @@ const cutBlob = (file: File, fileHash = 1, chunkSize = 100) => {
   }
   const getPost = () =>{
     axios.post("http:localhost:3000/api/upload/file",{
-      
+
     }).then(res=>{
       console.log(res);
     }).catch(err=>console.log(err))

@@ -2,6 +2,7 @@ import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs';
 import path from 'path';
 import json from '@rollup/plugin-json';
+
 export default {
   input: 'server/app.js',
   output: {
@@ -14,3 +15,4 @@ export default {
     resolve()
   ]
 };
+
