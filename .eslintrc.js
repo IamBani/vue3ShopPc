@@ -8,8 +8,13 @@ module.exports = {
     "eslint:recommended",
     "@vue/typescript/recommended",
   ],
+  parser: "vue-eslint-parser",
   parserOptions: {
     ecmaVersion: 2020,
+    parser: "@typescript-eslint/parser",
+    ecmaFeatures : {
+      jsx : false
+    }
   },
   globals: {
     //与上方的rules是同级的

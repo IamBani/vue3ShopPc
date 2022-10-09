@@ -1,5 +1,6 @@
 <template>
   <footer class="login-footer">
+    <div @click="aa">122323</div>
     <div class="container">
       <p>
         <a href="javascript:;">关于我们</a>
@@ -16,34 +17,37 @@
   <el-upload
     ref="uploadRef"
     class="upload-demo"
-    action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15"
+    action=""
     :auto-upload="false"
-    :on-change="onChang"
+    :on-change="Chang"
   >
     <template #trigger>
       <el-button type="primary">select file</el-button>
     </template>
-
-    <el-button class="ml-3" type="success" @click="submitUpload">
-      upload to server
-    </el-button>
   </el-upload>
 </template>
 
 <script lang="ts" setup>
 type ChunkArr = {
-  index?: number
-  chunk?: Blob
+  index: number
+  chunk: Blob,
+  hash:string
 }
+interface FileMd5 {
+  hash:string
+  content:ArrayBuffer
+}
+type Callback = ()=>void
 import type { UploadFile, UploadFiles } from 'element-plus'
 import SparkMD5 from 'spark-md5'
 import axios from 'axios'
-const onChang = (e: UploadFile, el: UploadFiles) => {
-  console.log(e, el)
+const Chang = (e: UploadFile, el: UploadFiles) => {
   cutBlob(e.raw as File)
     .then((res) => {
-      console.log(res)
-      
+      getPost(res,5,()=>{
+        console.log(123);
+      })
+      console.log(123)
     })
     .catch((err) => console.log(err))
 }
@@ -54,7 +58,7 @@ const cutBlob = (file: File, fileHash = 1, chunkSize = 100) => {
   chunkSize = chunkSize * 1024
   const chunkNums = Math.ceil(file.size / chunkSize) // 切片总数
 
-  return new Promise((resolve, reject) => {
+  return new Promise<ChunkArr[]>((resolve, reject) => {
     let startIndex: number
     let endIndex: number | string | undefined
     let contentItem: Blob
@@ -66,12 +70,15 @@ const cutBlob = (file: File, fileHash = 1, chunkSize = 100) => {
 
       // 切割文件
       contentItem = blobSlice.call(file, startIndex, endIndex)
-      createFileMd5(contentItem).then(res=>{
-        console.log(res);
-      })
-      chunkArr.push({
-        index: i, // 当前文件片段顺序索引，一并传给后端确定顺序
-        chunk: contentItem, // 当前文件片段内容
+      createFileMd5<FileMd5>(contentItem).then(res=>{
+          chunkArr.push({
+            index: i, // 当前文件片段顺序索引，一并传给后端确定顺序
+            chunk: contentItem, // 当前文件片段内容
+            hash:res.hash
+          })
+          if(chunkArr.length === chunkNums){
+            resolve(chunkArr)
+          }
       })
     }
 
@@ -81,34 +88,75 @@ const cutBlob = (file: File, fileHash = 1, chunkSize = 100) => {
     //   name: file.name,
     //   size: file.size
     // }
-    resolve(chunkArr)
+   
   })
 }
- const createFileMd5 = (file: Blob) => {
-    return new Promise((resolve, reject) => {
-      const spark = new SparkMD5.ArrayBuffer()
+
+  const createFileMd5 =<T = FileMd5>(file:Blob)=>{
+    return new Promise<FileMd5>((resolve,reject)=>{
+       const spark = new SparkMD5.ArrayBuffer()
       const reader = new FileReader()
       reader.readAsArrayBuffer(file)
        reader.addEventListener('loadend', () => {
           const content = reader.result as ArrayBuffer
-          console.log(spark);
           spark.append(content)
           const hash = spark.end()
-          resolve({hash, content})
+          resolve({hash,content})
         })
-        
-        reader.addEventListener('error', function _error(err) {
+      reader.addEventListener('error', function _error(err) {
           reject(err)
         })
     })
   }
-  const getPost = () =>{
-    axios.post("http:localhost:3000/api/upload/file",{
-
-    }).then(res=>{
-      console.log(res);
-    }).catch(err=>console.log(err))
+  const getPost = (data:ChunkArr[],max = 6, callback:Callback) =>{
+    let fetchArr:ChunkArr[] = [] 
+    console.log(data);
+     let toFetch = () => {
+      const item = data.shift()
+      if(!item){return}
+      sendChunk(item)?.then(res=>{
+        fetchArr.splice(fetchArr.indexOf(item as ChunkArr),1)
+        toFetch()
+        if(!data.length && !fetchArr.length){
+          callback()
+        }
+      }).catch(err=>{
+        //  data.unshift(item as ChunkArr) 
+         console.log(err)
+      })
+      fetchArr.push(item)
+      if(fetchArr.length>=max){
+        return
+      }else{
+        toFetch()
+      }
+     }
+    toFetch()
   }
+
+  const sendChunk = (item?:ChunkArr)=> {
+      if (!item) return
+      let formdata = new FormData()
+      formdata.append("file", item.chunk)
+      formdata.append("index", `${item.index}`)
+      formdata.append("hash", item.hash)
+     return axios({
+        url:"http://localhost:3000/api/upload/file",
+        method:'post',
+        // headers: { "Content-Type": "multipart/form-data" },
+        // data: formdata,
+        data: {user:123},
+      })
+    }
+const aa =()=>{
+  axios({
+        url:"http://localhost:3000/abc",
+        method:'post',
+        data: {user:123},
+      }).then(res=>{
+        console.log(res);
+      })
+}
 </script>
 
 <style scoped lang="less">
