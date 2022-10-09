@@ -110,7 +110,6 @@ const cutBlob = (file: File, fileHash = 1, chunkSize = 100) => {
   }
   const getPost = (data:ChunkArr[],max = 6, callback:Callback) =>{
     let fetchArr:ChunkArr[] = [] 
-    console.log(data);
      let toFetch = () => {
       const item = data.shift()
       if(!item){return}
@@ -143,20 +142,10 @@ const cutBlob = (file: File, fileHash = 1, chunkSize = 100) => {
      return axios({
         url:"http://localhost:3000/api/upload/file",
         method:'post',
-        // headers: { "Content-Type": "multipart/form-data" },
-        // data: formdata,
-        data: {user:123},
+        headers: { "Content-Type": "multipart/form-data" },
+        data: formdata,
       })
     }
-const aa =()=>{
-  axios({
-        url:"http://localhost:3000/abc",
-        method:'post',
-        data: {user:123},
-      }).then(res=>{
-        console.log(res);
-      })
-}
 </script>
 
 <style scoped lang="less">
