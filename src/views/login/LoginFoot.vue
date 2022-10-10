@@ -1,6 +1,5 @@
 <template>
   <footer class="login-footer">
-    <div @click="aa">122323</div>
     <div class="container">
       <p>
         <a href="javascript:;">关于我们</a>
@@ -143,20 +142,11 @@ const cutBlob = (file: File, fileHash = 1, chunkSize = 100) => {
      return axios({
         url:"http://localhost:3000/api/upload/file",
         method:'post',
-        // headers: { "Content-Type": "multipart/form-data" },
-        // data: formdata,
-        data: {user:123},
+        headers: { "Content-Type": "multipart/form-data" },
+        data: formdata,
+        // data: {user:123},
       })
     }
-const aa =()=>{
-  axios({
-        url:"http://localhost:3000/abc",
-        method:'post',
-        data: {user:123},
-      }).then(res=>{
-        console.log(res);
-      })
-}
 </script>
 
 <style scoped lang="less">

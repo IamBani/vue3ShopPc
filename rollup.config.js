@@ -11,8 +11,10 @@ export default {
   },
   plugins: [
     json(),
+    resolve({
+      modulesOnly: true
+    }),
     commonjs(),
-    resolve()
   ]
 };
 

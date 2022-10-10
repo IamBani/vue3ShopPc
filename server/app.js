@@ -37,13 +37,7 @@ app.use(async (ctx, next) => {
   }
  })
 
-app.use(koaBody({
-  multipart:true,
-  formidable: {
-    maxFieldsSize: 1024 * 1024 * 1024,
-    uploadDir:uploadPath
-  }
-}))
+
 function uploadFn(ctx, destPath) {
   return new Promise((resolve, reject) => {
     const { name, path: _path } = ctx.request.files.file // 拿到上传的文件信息
@@ -59,28 +53,35 @@ function uploadFn(ctx, destPath) {
   })
 }
 
+app.use(koaBody({
+  multipart:true,
+  formidable: {
+    maxFieldsSize: 1024 * 1024 * 1024,
+    uploadDir:uploadPath
+  }
+}))
 
 router.post('/api/upload/file', (ctx) => {
-  console.log(ctx)
-    // const { index, hash } = ctx.request.body
-    // const chunksPath = path.join(uploadPath, hash, '/')
-    // if(!fs.existsSync(chunksPath)) {
-    //   fs.mkdirSync(chunksPath)
-    // }
-    // const chunksFileName = chunksPath + hash + '-' + index
-    // uploadFn(ctx,chunksFileName).then(() => {
+  console.log(ctx.request.body,133,JSON.stringify(ctx.request))
+    const { index, hash } = ctx.request.body
+    const chunksPath = path.join(uploadPath, hash, '/')
+    if(!fs.existsSync(chunksPath)) {
+      fs.mkdirSync(chunksPath)
+    }
+    const chunksFileName = chunksPath + hash + '-' + index
+    uploadFn(ctx,chunksFileName).then(() => {
       ctx.body = {
         code: 0,
         url: path.join('http://localhost:3000/uploads'),
         msg: '文件上传成功'
       }
-    // }).catch(err => {
-    //   console.log(err);
-    //   ctx.body = {
-    //     code: -1,
-    //     msg: '文件上传失败'
-    //   }
-    // })
+    }).catch(err => {
+      console.log(err);
+      ctx.body = {
+        code: -1,
+        msg: '文件上传失败'
+      }
+    })
 })
 
 
