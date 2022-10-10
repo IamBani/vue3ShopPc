@@ -109,7 +109,6 @@ const cutBlob = (file: File, fileHash = 1, chunkSize = 100) => {
   }
   const getPost = (data:ChunkArr[],max = 6, callback:Callback) =>{
     let fetchArr:ChunkArr[] = [] 
-    console.log(data);
      let toFetch = () => {
       const item = data.shift()
       if(!item){return}

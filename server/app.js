@@ -9,34 +9,34 @@ import koaRouter from 'koa-router'
 
 const app = new koa()
 
+const router = koaRouter()
 
 const uploadPath = path.join(__dirname, 'public/uploads') 
 
 if (!fs.existsSync(uploadPath)) {
   fs.mkdirSync(uploadPath)
  }
- const router = koaRouter()
 
-app.use(async (ctx, next) => {
-  console.log(`Process ${ctx.request.method} ${ctx.request.url}...`);
-   ctx.set('Access-Control-Allow-Origin', '*');
-   ctx.set('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
-   ctx.set('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
-  if (ctx.request.method === 'OPTIONS') {
-    ctx.status = 200
-  }
-  ctx.body = "hell,word 132"
-  try {
-    await next();
-  } catch (err) {
-    ctx.status = err.statusCode || err.status || 500
-    ctx.body = {
-      code: 500,
-      msg: err.message
-    }
-  }
- })
+// app.use(async (ctx, next) => {
+//   console.log(`Process ${ctx.request.method} ${ctx.request.url}...`);
+//    ctx.set('Access-Control-Allow-Origin', '*');
+//    ctx.set('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
+//    ctx.set('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
+//   if (ctx.request.method === 'OPTIONS') {
+//     ctx.status = 200
+//   }
+//   try {
+//     await next();
+//   } catch (err) {
+//     ctx.status = err.statusCode || err.status || 500
+//     ctx.body = {
+//       code: 500,
+//       msg: err.message
+//     }
+//   }
+//  })
 
+  
 
 function uploadFn(ctx, destPath) {
   return new Promise((resolve, reject) => {
@@ -85,7 +85,7 @@ router.post('/api/upload/file', (ctx) => {
 })
 
 
-  app.use(router.routes());
+app.use(router.routes());
   app.listen(3000, () => {
     console.log('服务启动成功');
   })
