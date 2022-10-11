@@ -4,7 +4,7 @@ declare module '*.vue' {
   const component: DefineComponent<{}, {}, any>
   export default component
 }
-
+declare module 'worker-loader!@/utils/hash.worker.ts';
 declare module "*.svg";
 declare module "*.png";
 declare module "*.jpg";

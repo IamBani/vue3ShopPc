@@ -40,6 +40,7 @@ type Callback = ()=>void
 import type { UploadFile, UploadFiles } from 'element-plus'
 import SparkMD5 from 'spark-md5'
 import axios from 'axios'
+// import Worker from 'worker-loader!@/utils/hash.worker'
 const Chang = (e: UploadFile, el: UploadFiles) => {
   cutBlob(e.raw as File)
     .then((res) => {
@@ -50,6 +51,16 @@ const Chang = (e: UploadFile, el: UploadFiles) => {
     })
     .catch((err) => console.log(err))
 }
+
+// const a = ()=>{
+//    const worker = new Worker()
+
+//        worker.postMessage({file, chunkSize: this.chunkSize})
+
+//        worker.onmessage = event => {
+//          resolve(event.data)
+//        }
+// }
 
 const cutBlob = (file: File, fileHash = 1, chunkSize = 100) => {
   const chunkArr: ChunkArr[] = [] // 所有切片缓存数组
